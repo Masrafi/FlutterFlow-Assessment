@@ -8,35 +8,31 @@ class MyButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
-    this.isDisabled,
+    required this.isDisabled,
     this.disabledOnPressed
   });
 
   final String text;
   final VoidCallback onPressed;
-  bool? isDisabled = false;
+  bool isDisabled;
   final VoidCallback? disabledOnPressed;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: isDisabled == true ? disabledOnPressed : onPressed,
+      onTap: onPressed,
       child: Container(
-        height: 50,
+        height: 60,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: isDisabled == true ? borderColor : borderColor,
-          // border: Border.all(
-          //   width: 1.0,
-          //   //color: whiteColor,
-          // ),
-          borderRadius: BorderRadius.all(
-              Radius.circular(10.0) //                 <--- border radius here
+          color: isDisabled == true ? borderColor : addColor,
+          borderRadius: const BorderRadius.all(
+              Radius.circular(10.0)
               ),
         ),
         child: Center(
           child: Text(
             text,
-            style: AppTextStyle.hintTextStyle().copyWith(fontWeight: FontWeight.w500),
+            style: AppTextStyle.hintTextStyle().copyWith(fontWeight: FontWeight.w500, color: isDisabled ? hintTextColor : whiteColor),
           ),
         ),
       ),

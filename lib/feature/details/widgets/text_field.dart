@@ -10,12 +10,12 @@ class CustomStyledTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
 
   const CustomStyledTextField({
-    Key? key,
+    super.key,
     required this.label,
     required this.suffixText,
     this.controller,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class CustomStyledTextField extends StatelessWidget {
       controller: controller,
       onChanged: onChanged,
       decoration: InputDecoration(
-      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
+      contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
         hintText: label,
         hintStyle: AppTextStyle.hintTextStyle(),
         filled: true,

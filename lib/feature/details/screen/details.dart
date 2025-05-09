@@ -1,11 +1,7 @@
 import 'package:atbjobsapp/config/theme/app_text_style.dart';
-import 'package:atbjobsapp/config/theme/colors.dart';
-import 'package:atbjobsapp/core/utils/appBar_widget.dart';
-import 'package:atbjobsapp/core/utils/app_box_decoration.dart';
+import 'package:atbjobsapp/core/utils/appbar_widget.dart';
 import 'package:atbjobsapp/core/utils/app_button.dart';
-import 'package:atbjobsapp/core/utils/assets/image_assets.dart';
 import 'package:atbjobsapp/feature/details/widgets/dropdown_service.dart';
-import 'package:atbjobsapp/core/utils/svg_image.dart';
 import 'package:atbjobsapp/feature/details/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -88,7 +84,7 @@ class _DetailsState extends State<Details> {
         alignment: Alignment.bottomCenter,
         child: Padding(
           padding: const EdgeInsets.only(left: 16, right: 16, bottom: 30),
-          child: MyButton(text: 'Next', onPressed: (){Navigator.pushNamed(context, '/order');}),
+          child: MyButton(text: 'Next', isDisabled: true, onPressed: (){Navigator.pushNamed(context, '/order');}),
         ))
       ],
     ),
