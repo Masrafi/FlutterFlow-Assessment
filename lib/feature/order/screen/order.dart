@@ -7,7 +7,8 @@ import 'package:atbjobsapp/feature/order/widgets/product_info.dart';
 import 'package:flutter/material.dart';
 
 class Order extends StatefulWidget {
-  const Order({super.key});
+  final double calories;
+  const Order({super.key, required this.calories});
 
   @override
   State<Order> createState() => _OrderState();

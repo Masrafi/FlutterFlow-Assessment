@@ -21,11 +21,21 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: theme(),
       initialRoute: '/',
-        routes: {
-          '/': (context) => const Details(),
-           '/order': (context) => const Order(),
-           '/orderSummary': (context) => OrderSummary(),
-       },
+      onGenerateRoute: (settings) {
+      switch (settings.name) {
+        case '/':
+          return MaterialPageRoute(builder: (_) => const Details());
+        case '/order':
+          final calories = settings.arguments as double; // any type
+          return MaterialPageRoute(builder: (_) => Order(calories: calories));
+        case '/orderSummary':
+          return MaterialPageRoute(
+            builder: (_) => OrderSummary(),
+          );
+        default:
+          return null;
+      }
+    },
     );
   }
 }
