@@ -7,14 +7,17 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class ProductInfo extends StatefulWidget {
   final String name;
   final String image;
-  const ProductInfo({super.key, required this.name, required this.image});
+  final String cal;
+  final GestureTapCallback? onTapAdd;
+  final GestureTapCallback? onTapSub;
+  final int increase;
+  const ProductInfo({super.key, required this.name, required this.image, required this.cal, required this.onTapAdd, required this.onTapSub, required this.increase});
 
   @override
   State<ProductInfo> createState() => _ProductInfoState();
 }
 
 class _ProductInfoState extends State<ProductInfo> {
-  int increase = 0;
   bool isShow = false;
 
   @override
@@ -46,7 +49,7 @@ class _ProductInfoState extends State<ProductInfo> {
          children: [
            Text(widget.name, style: AppTextStyle.hintTextStyle().copyWith(color: defaultTextColor, fontWeight: FontWeight.w400),),
            const Spacer(),
-           Text("12 Cal", style: AppTextStyle.hintTextStyle().copyWith(fontSize: 14),),
+           Text("${widget.cal} Cal", style: AppTextStyle.hintTextStyle().copyWith(fontSize: 14),),
          ],
          ),
          const SizedBox(height: 5,),
@@ -72,21 +75,25 @@ class _ProductInfoState extends State<ProductInfo> {
            ) :
            Row(
            children: [
-             CircleButton(onTap: (){
-               setState(() {
-                 increase++;
-               });
-             }, icon: const Icon(FontAwesomeIcons.plus, size: 15, color: whiteColor),),
+             CircleButton(onTap: widget.onTapAdd,
+             // (){
+             //   setState(() {
+             //     increase++;
+             //   });
+             // }, 
+             icon: const Icon(FontAwesomeIcons.plus, size: 15, color: whiteColor),),
              SizedBox(width: 7),
-             Text(increase.toString(), style: AppTextStyle.hintTextStyle().copyWith(color: defaultTextColor, fontWeight: FontWeight.w500)),
+             Text(widget.increase.toString(), style: AppTextStyle.hintTextStyle().copyWith(color: defaultTextColor, fontWeight: FontWeight.w500)),
              SizedBox(width: 7),
-             CircleButton(onTap: (){
-               if(increase>0){
-                 setState(() {
-                   increase--;
-                 });
-               }
-             }, icon:  Icon(FontAwesomeIcons.minus, size: 15, color: whiteColor),)
+             CircleButton(onTap: widget.onTapSub,
+             // (){
+             //   if(increase>0){
+             //     setState(() {
+             //       increase--;
+             //     });
+             //   }
+             // }, 
+             icon:  Icon(FontAwesomeIcons.minus, size: 15, color: whiteColor),)
              
            ],
            )

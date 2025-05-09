@@ -26,6 +26,17 @@ class Order extends StatefulWidget {
 }
 
 class _OrderState extends State<Order> {
+  late List<int> vegetableCounts;
+  late List<int> meatCounts;
+  late List<int> carbCounts;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    vegetableCounts = [];
+    meatCounts = [];
+    carbCounts = [];
+  }
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -53,6 +64,9 @@ class _OrderState extends State<Order> {
                     builder: (context, state) {
                       if (state is FoodLoading) return CircularProgressIndicator();
                       if (state is FoodLoaded) {
+                        if (vegetableCounts.length != state.foods.length) {
+                          vegetableCounts = List.generate(state.foods.length, (_) => 0);
+                        }
                         return SizedBox(
                         height: 220,
                           child: ListView.builder(
@@ -60,12 +74,21 @@ class _OrderState extends State<Order> {
                             itemCount: state.foods.length,
                             itemBuilder: (context, index) {
                               final food = state.foods[index];
-                              return ProductInfo(name: food.foodName, image: food.imageUrl);
-                              // ListTile(
-                              //   title: Text(food.foodName),
-                              //   subtitle: Text("${food.calories} cal"),
-                              //   leading: Image.network(food.imageUrl),
-                              // );
+                              return ProductInfo(name: food.foodName, image: food.imageUrl, cal: food.calories.toString(),
+                              increase: vegetableCounts[index],
+                              onTapAdd: (){
+                                 setState(() {
+                                   //increase++;
+                                   vegetableCounts[index]++;
+                                 });
+                              },
+                              onTapSub: (){
+                                 setState(() {
+                                   //increase--;
+                                   if (vegetableCounts[index] > 0) vegetableCounts[index]--;
+                                 });
+                              },
+                              );
                             },
                           ),
                         );
@@ -80,19 +103,29 @@ class _OrderState extends State<Order> {
                     builder: (context, state) {
                       if (state is MeatLoading) return CircularProgressIndicator();
                       if (state is MeatLoaded) {
+                        if (meatCounts.length != state.meats.length) {
+                          meatCounts = List.generate(state.meats.length, (_) => 0);
+                        }
                         return SizedBox(
                         height: 220,
                           child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                            itemCount: state.carbs.length,
+                            itemCount: state.meats.length,
                             itemBuilder: (context, index) {
-                              final food = state.carbs[index];
-                              return ProductInfo(name: food.foodName, image: food.imageUrl);
-                              // ListTile(
-                              //   title: Text(food.foodName),
-                              //   subtitle: Text("${food.calories} cal"),
-                              //   leading: Image.network(food.imageUrl),
-                              // );
+                              final food = state.meats[index];
+                              return ProductInfo(name: food.foodName, image: food.imageUrl, cal: food.calories.toString(),
+                              increase: meatCounts[index],
+                              onTapAdd: (){
+                                 setState(() {
+                                   meatCounts[index]++;
+                                 });
+                              },
+                              onTapSub: (){
+                                 setState(() {
+                                   if (meatCounts[index] > 0) meatCounts[index]--;
+                                 });
+                              },
+                              );
                             },
                           ),
                         );
@@ -107,6 +140,9 @@ class _OrderState extends State<Order> {
                     builder: (context, state) {
                       if (state is CarbLoading) return CircularProgressIndicator();
                       if (state is CarbLoaded) {
+                        if (carbCounts.length != state.carbs.length) {
+                          carbCounts = List.generate(state.carbs.length, (_) => 0);
+                        }
                         return SizedBox(
                         height: 220,
                           child: ListView.builder(
@@ -114,12 +150,19 @@ class _OrderState extends State<Order> {
                             itemCount: state.carbs.length,
                             itemBuilder: (context, index) {
                               final food = state.carbs[index];
-                              return ProductInfo(name: food.foodName, image: food.imageUrl);
-                              // ListTile(
-                              //   title: Text(food.foodName),
-                              //   subtitle: Text("${food.calories} cal"),
-                              //   leading: Image.network(food.imageUrl),
-                              // );
+                              return ProductInfo(name: food.foodName, image: food.imageUrl, cal: food.calories.toString(),
+                              increase: carbCounts[index],
+                              onTapAdd: (){
+                                 setState(() {
+                                   carbCounts[index]++;
+                                 });
+                              },
+                              onTapSub: (){
+                                 setState(() {
+                                   if (carbCounts[index] > 0) carbCounts[index]--;
+                                 });
+                              },
+                              );
                             },
                           ),
                         );
@@ -150,7 +193,7 @@ class _OrderState extends State<Order> {
                     children: [
                       Text("Cals", style: AppTextStyle.hintTextStyle().copyWith(color: defaultTextColor, fontWeight: FontWeight.w400),),
                       const Spacer(),
-                      Text("1198 Cal out of 1200 Cal", style: AppTextStyle.hintTextStyle().copyWith(fontSize: 14),)
+                      Text("1198 Cal out of ${widget.calories.toString()} Cal", style: AppTextStyle.hintTextStyle().copyWith(fontSize: 14),)
                     ],
                     ),
                     const SizedBox(height: 5,),

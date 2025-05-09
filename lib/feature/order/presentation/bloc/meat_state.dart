@@ -12,12 +12,12 @@ class MeatInitial extends MeatState {}
 class MeatLoading extends MeatState {}
 
 class MeatLoaded extends MeatState {
-  final List<FoodEntity> carbs;
+  final List<FoodEntity> meats;
 
-  MeatLoaded(this.carbs);
+  MeatLoaded(this.meats);
 
   @override
-  List<Object?> get props => [carbs];
+  List<Object?> get props => [meats];
 }
 
 class MeatError extends MeatState {
