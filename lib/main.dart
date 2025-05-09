@@ -1,7 +1,6 @@
 import 'package:atbjobsapp/config/theme/app_themes.dart';
 import 'package:atbjobsapp/feature/details/screen/details.dart';
 import 'package:atbjobsapp/feature/order/presentation/screen/order.dart';
-import 'package:atbjobsapp/feature/order/presentation/screen/test.dart';
 import 'package:atbjobsapp/feature/summary/screen/login.dart';
 import 'package:atbjobsapp/feature/welcome/screen/signup_screen.dart';
 import 'package:firebase_core/firebase_core.dart';

@@ -1,8 +1,6 @@
 import 'package:atbjobsapp/feature/order/domain/usecases/fetch_foods_usecase.dart';
 import 'package:atbjobsapp/feature/order/presentation/bloc/food_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
-
 import 'food_event.dart';
 
 

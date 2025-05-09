@@ -6,4 +6,4 @@ abstract class CarbEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class LoadCarbsEvent extends CarbEvent {}
+class LoadCarbEvent extends CarbEvent {}

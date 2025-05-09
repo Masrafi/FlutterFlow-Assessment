@@ -25,5 +25,15 @@ class FoodRepositoryImpl implements FoodRepository {
       calories: model.calories,
       imageUrl: model.imageUrl,
     )).toList();
+  }  
+  
+  @override
+  Future<List<FoodEntity>> getCarbs() async {
+    final models = await remoteDataSource.getCarbs();
+    return models.map((model) => FoodEntity(
+      foodName: model.foodName,
+      calories: model.calories,
+      imageUrl: model.imageUrl,
+    )).toList();
   }
 }
