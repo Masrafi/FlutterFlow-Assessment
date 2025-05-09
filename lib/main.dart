@@ -1,0 +1,30 @@
+import 'package:atbjobsapp/config/theme/app_themes.dart';
+import 'package:atbjobsapp/feature/details/screen/details.dart';
+import 'package:atbjobsapp/feature/order/screen/order.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+    scrollBehavior: ScrollConfiguration.of(context).copyWith(
+            overscroll: false,
+        ),
+    debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: theme(),
+      initialRoute: '/',
+        routes: {
+          '/': (context) => const Details(),
+           '/order': (context) => const Order(),
+          // '/third': (context) => ThirdScreen(),
+       },
+    );
+  }
+}
