@@ -10,5 +10,6 @@ class Assets {
   static const String orderRice = 'assets/order/rice.png';
   static const String orderSalmon = 'assets/order/salmon.png';
   static const String poppinsPoppinsLight = 'assets/fonts/poppins/Poppins-Light.ttf';
+  static const String welcomeWelcome = 'assets/welcome/welcome.png';
 
 }
