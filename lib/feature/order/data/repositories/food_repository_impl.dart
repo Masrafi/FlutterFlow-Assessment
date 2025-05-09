@@ -10,7 +10,6 @@ class FoodRepositoryImpl implements FoodRepository {
   @override
   Future<List<FoodEntity>> getFoods() async {
     final models = await remoteDataSource.fetchFoods();
-    print('.................... getFoods');
     return models.map((model) => FoodEntity(
       foodName: model.foodName,
       calories: model.calories,
@@ -19,9 +18,18 @@ class FoodRepositoryImpl implements FoodRepository {
   }
   
   @override
+  Future<List<FoodEntity>> getMeats() async {
+    final models = await remoteDataSource.getMeats();
+    return models.map((model) => FoodEntity(
+      foodName: model.foodName,
+      calories: model.calories,
+      imageUrl: model.imageUrl,
+    )).toList();
+  }  
+  
+  @override
   Future<List<FoodEntity>> getCarbs() async {
     final models = await remoteDataSource.getCarbs();
-    print('.................... getCarbs');
     return models.map((model) => FoodEntity(
       foodName: model.foodName,
       calories: model.calories,

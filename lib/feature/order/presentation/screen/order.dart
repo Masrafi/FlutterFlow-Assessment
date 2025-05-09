@@ -2,11 +2,13 @@ import 'package:atbjobsapp/config/theme/app_text_style.dart';
 import 'package:atbjobsapp/config/theme/colors.dart';
 import 'package:atbjobsapp/core/utils/appbar_widget.dart';
 import 'package:atbjobsapp/core/utils/app_button.dart';
-import 'package:atbjobsapp/core/utils/assets/image_assets.dart';
 import 'package:atbjobsapp/di.dart';
-import 'package:atbjobsapp/feature/order/presentation/bloc/curb_bloc.dart';
-import 'package:atbjobsapp/feature/order/presentation/bloc/curb_event.dart';
-import 'package:atbjobsapp/feature/order/presentation/bloc/curb_state.dart';
+import 'package:atbjobsapp/feature/order/presentation/bloc/carb_bloc.dart';
+import 'package:atbjobsapp/feature/order/presentation/bloc/carb_event.dart';
+import 'package:atbjobsapp/feature/order/presentation/bloc/carb_state.dart';
+import 'package:atbjobsapp/feature/order/presentation/bloc/meat_bloc.dart';
+import 'package:atbjobsapp/feature/order/presentation/bloc/meat_event.dart';
+import 'package:atbjobsapp/feature/order/presentation/bloc/meat_state.dart';
 import 'package:atbjobsapp/feature/order/presentation/bloc/food_bloc.dart';
 import 'package:atbjobsapp/feature/order/presentation/bloc/food_event.dart';
 import 'package:atbjobsapp/feature/order/presentation/widgets/product_info.dart';
@@ -29,7 +31,8 @@ class _OrderState extends State<Order> {
     return MultiBlocProvider(
              providers: [
                BlocProvider(create: (_) => getIt<FoodBloc>()..add(LoadVegetablesEvent())),
-               BlocProvider(create: (_) => getIt<CarbBloc>()..add(LoadCarbsEvent())),
+               BlocProvider(create: (_) => getIt<MeatBloc>()..add(LoadMeatEvent())),
+               BlocProvider(create: (_) => getIt<CarbBloc>()..add(LoadCarbEvent())),
              ],
         child: Scaffold(
         body: Stack(
@@ -73,6 +76,33 @@ class _OrderState extends State<Order> {
                   ),
                   const SizedBox(height: 16,),
                   Text("Meats", style: AppTextStyle.appBarStyle(),),
+                  BlocBuilder<MeatBloc, MeatState>(
+                    builder: (context, state) {
+                      if (state is MeatLoading) return CircularProgressIndicator();
+                      if (state is MeatLoaded) {
+                        return SizedBox(
+                        height: 220,
+                          child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                            itemCount: state.carbs.length,
+                            itemBuilder: (context, index) {
+                              final food = state.carbs[index];
+                              return ProductInfo(name: food.foodName, image: food.imageUrl);
+                              // ListTile(
+                              //   title: Text(food.foodName),
+                              //   subtitle: Text("${food.calories} cal"),
+                              //   leading: Image.network(food.imageUrl),
+                              // );
+                            },
+                          ),
+                        );
+                      }
+                      if (state is MeatError) return Text(state.message);
+                      return Container();
+                    },
+                  ),
+                  const SizedBox(height: 16,),
+                  Text("Carbs", style: AppTextStyle.appBarStyle(),),
                   BlocBuilder<CarbBloc, CarbState>(
                     builder: (context, state) {
                       if (state is CarbLoading) return CircularProgressIndicator();
@@ -97,17 +127,6 @@ class _OrderState extends State<Order> {
                       if (state is CarbError) return Text(state.message);
                       return Container();
                     },
-                  ),
-                  const SizedBox(height: 16,),
-                  Text("Carbs", style: AppTextStyle.appBarStyle(),),
-                  const SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        ProductInfo(name: 'Lean Beef', image: icCorn),
-                        ProductInfo(name: 'Salmon', image: icRice),
-                      ],
-                    ),
                   ),
                   const SizedBox(height: 170,),
                 ],
