@@ -12,7 +12,7 @@ class CarbBloc extends Bloc<CarbEvent, CarbState> {
     on<LoadCarbsEvent>((event, emit) async {
       emit(CarbLoading());
       try {
-        final carbs = await fetchFoodsUseCase.getCarbs();
+        final carbs = await fetchFoodsUseCase.getMeats();
         emit(CarbLoaded(carbs));
       } catch (e) {
         emit(CarbError("Failed to load carbs"));

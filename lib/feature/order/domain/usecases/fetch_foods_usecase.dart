@@ -7,5 +7,5 @@ class FetchFoodsUseCase {
   FetchFoodsUseCase(this.repository);
 
   Future<List<FoodEntity>> call() => repository.getFoods();
-  Future<List<FoodEntity>> getCarbs() => repository.getCarbs();
+  Future<List<FoodEntity>> getMeats() => repository.getMeats();
 }

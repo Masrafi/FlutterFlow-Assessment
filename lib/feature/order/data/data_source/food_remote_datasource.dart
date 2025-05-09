@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class FoodRemoteDataSource {
   Future<List<FoodModel>> fetchFoods();
-  Future<List<FoodModel>> getCarbs();
+  Future<List<FoodModel>> getMeats();
 }
 
 class FirebaseFoodRemoteDataSource implements FoodRemoteDataSource {
@@ -20,7 +20,7 @@ class FirebaseFoodRemoteDataSource implements FoodRemoteDataSource {
   
   
   @override
-  Future<List<FoodModel>> getCarbs() async {
+  Future<List<FoodModel>> getMeats() async {
       final snapshot = await firestore.collection('carb').get();
       print("last .................. ${snapshot.docs.first}");
           return snapshot.docs.map((doc) => FoodModel.fromJson(doc.data())).toList();
