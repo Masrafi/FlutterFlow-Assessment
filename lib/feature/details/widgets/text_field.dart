@@ -22,6 +22,7 @@ class CustomStyledTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       onChanged: onChanged,
+      keyboardType: TextInputType.number,
       decoration: InputDecoration(
       contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
         hintText: label,
