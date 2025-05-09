@@ -1,11 +1,19 @@
 import 'package:atbjobsapp/config/theme/app_themes.dart';
 import 'package:atbjobsapp/feature/details/screen/details.dart';
-import 'package:atbjobsapp/feature/order/screen/order.dart';
+import 'package:atbjobsapp/feature/order/presentation/screen/order.dart';
+import 'package:atbjobsapp/feature/order/presentation/screen/test.dart';
 import 'package:atbjobsapp/feature/summary/screen/login.dart';
 import 'package:atbjobsapp/feature/welcome/screen/signup_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+import 'di.dart';
+
+void main() async{
+  
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await setup();
   runApp(const MyApp());
 }
 
@@ -25,7 +33,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: (settings) {
       switch (settings.name) {
         case '/':
-          return MaterialPageRoute(builder: (_) => const Welcome());
+          return MaterialPageRoute(builder: (_) =>  Welcome());
         case '/details':
           return MaterialPageRoute(builder: (_) => const Details());
         case '/order':
