@@ -118,7 +118,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
         controller: _controller,
         focusNode: _focusNode,
         decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
+        contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
         hintText: widget.label ?? 'Select item',
           hintStyle: AppTextStyle.hintTextStyle(),
           suffixIcon: const Icon(Icons.arrow_drop_down),

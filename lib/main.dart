@@ -1,6 +1,7 @@
 import 'package:atbjobsapp/config/theme/app_themes.dart';
 import 'package:atbjobsapp/feature/details/screen/details.dart';
 import 'package:atbjobsapp/feature/order/screen/order.dart';
+import 'package:atbjobsapp/feature/summary/screen/login.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => const Details(),
            '/order': (context) => const Order(),
-          // '/third': (context) => ThirdScreen(),
+           '/orderSummary': (context) => OrderSummary(),
        },
     );
   }
