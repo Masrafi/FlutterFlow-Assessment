@@ -1,5 +1,6 @@
 import 'package:atbjobsapp/config/theme/app_text_style.dart';
 import 'package:atbjobsapp/config/theme/colors.dart';
+import 'package:atbjobsapp/core/extensions/extensions.dart';
 import 'package:atbjobsapp/core/utils/appbar_widget.dart';
 import 'package:atbjobsapp/core/utils/app_button.dart';
 import 'package:atbjobsapp/di.dart';
@@ -29,6 +30,9 @@ class _OrderState extends State<Order> {
   late List<int> vegetableCounts;
   late List<int> meatCounts;
   late List<int> carbCounts;
+  int selectedCalories = 0;
+  int selectedExpense = 0;
+  bool isButtonEnable = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -80,12 +84,23 @@ class _OrderState extends State<Order> {
                                  setState(() {
                                    //increase++;
                                    vegetableCounts[index]++;
+                                   selectedCalories += food.calories;
+                                  if(100 - selectedCalories.percentageTowards(widget.calories)<=10){
+                                    isButtonEnable = false;
+                                  }
+                                   selectedExpense += 12;
                                  });
                               },
                               onTapSub: (){
                                  setState(() {
-                                   //increase--;
-                                   if (vegetableCounts[index] > 0) vegetableCounts[index]--;
+                                   if (vegetableCounts[index] > 0){ 
+                                     selectedCalories -= food.calories;
+                                     selectedExpense -= 12;
+                                   if(100 - selectedCalories.percentageTowards(widget.calories)>10){
+                                     isButtonEnable = true;
+                                   }
+                                     vegetableCounts[index]--;
+                                   }
                                  });
                               },
                               );
@@ -118,11 +133,23 @@ class _OrderState extends State<Order> {
                               onTapAdd: (){
                                  setState(() {
                                    meatCounts[index]++;
+                                   selectedCalories += food.calories;
+                                   if(100 - selectedCalories.percentageTowards(widget.calories)<=10){
+                                     isButtonEnable = false;
+                                   }
+                                   selectedExpense += 12;
                                  });
                               },
                               onTapSub: (){
                                  setState(() {
-                                   if (meatCounts[index] > 0) meatCounts[index]--;
+                                   if (meatCounts[index] > 0){
+                                     selectedCalories -= food.calories;
+                                     selectedExpense -= 12;
+                                   if(100 - selectedCalories.percentageTowards(widget.calories)>10){
+                                     isButtonEnable = true;
+                                   }
+                                     meatCounts[index]--;
+                                   }
                                  });
                               },
                               );
@@ -155,11 +182,23 @@ class _OrderState extends State<Order> {
                               onTapAdd: (){
                                  setState(() {
                                    carbCounts[index]++;
+                                   selectedCalories += food.calories;
+                                   selectedExpense += 12;
+                                   if(100 - selectedCalories.percentageTowards(widget.calories)<=10){
+                                     isButtonEnable = false;
+                                   }
                                  });
                               },
                               onTapSub: (){
                                  setState(() {
-                                   if (carbCounts[index] > 0) carbCounts[index]--;
+                                   if (carbCounts[index] > 0){
+                                     selectedCalories -= food.calories;
+                                     selectedExpense -= 12;
+                                   if(100 - selectedCalories.percentageTowards(widget.calories)>10){
+                                     isButtonEnable = true;
+                                   }
+                                     carbCounts[index]--;
+                                   }
                                  });
                               },
                               );
@@ -193,7 +232,7 @@ class _OrderState extends State<Order> {
                     children: [
                       Text("Cals", style: AppTextStyle.hintTextStyle().copyWith(color: defaultTextColor, fontWeight: FontWeight.w400),),
                       const Spacer(),
-                      Text("1198 Cal out of ${widget.calories.toString()} Cal", style: AppTextStyle.hintTextStyle().copyWith(fontSize: 14),)
+                      Text("${selectedCalories.toString()} Cal out of ${widget.calories.toString()} Cal", style: AppTextStyle.hintTextStyle().copyWith(fontSize: 14),)
                     ],
                     ),
                     const SizedBox(height: 5,),
@@ -201,11 +240,11 @@ class _OrderState extends State<Order> {
                     children: [
                       Text("Price", style: AppTextStyle.hintTextStyle().copyWith(color: defaultTextColor, fontWeight: FontWeight.w400),),
                       const Spacer(),
-                      Text("\$ 125", style: AppTextStyle.hintTextStyle().copyWith(fontSize: 14, color: addColor),)
+                      Text("\$ ${selectedExpense.toString()}", style: AppTextStyle.hintTextStyle().copyWith(fontSize: 14, color: addColor),)
                     ],
                     ),
                     const SizedBox(height: 10,),
-                    MyButton(text: 'Place Order', isDisabled: false, onPressed: (){Navigator.pushNamed(context, '/orderSummary');}),
+                    MyButton(text: 'Place Order', isDisabled: isButtonEnable, onPressed: (){Navigator.pushNamed(context, '/orderSummary');}),
                   ],
                 ),
               ),
