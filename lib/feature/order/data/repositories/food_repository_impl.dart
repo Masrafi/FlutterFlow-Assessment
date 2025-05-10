@@ -35,5 +35,8 @@ class FoodRepositoryImpl implements FoodRepository {
       calories: model.calories,
       imageUrl: model.imageUrl,
     )).toList();
-  }
+  }  
+  
+  @override
+  Future<bool> postApi(Map<String, dynamic> data) => remoteDataSource.postApi(data);
 }

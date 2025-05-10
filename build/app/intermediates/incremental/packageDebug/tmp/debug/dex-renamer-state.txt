@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #Sat May 10 23:03:24 BDT 2025
+=======
+#Sat May 10 22:48:57 BDT 2025
+>>>>>>> c80337f00c1dc3e5823512eabec3fe236e6af546
 base.0=/Users/mdkhorshedalam/Downloads/atbjobsapp/build/app/intermediates/dex/debug/mergeExtDexDebug/classes.dex
 base.1=/Users/mdkhorshedalam/Downloads/atbjobsapp/build/app/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
 base.2=/Users/mdkhorshedalam/Downloads/atbjobsapp/build/app/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
