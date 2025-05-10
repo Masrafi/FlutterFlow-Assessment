@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "/Users/mdkhorshedalam/.gradle/caches/transforms-3/cc7c9a3b8db57b5509622b236f93ae74/transformed/jetified-play-services-base-18.0.1/res/values-it/values.xml",
+                    "source": "/Users/mdkhorshedalam/.gradle/caches/transforms-3/63b58236e4308d63b57a3ada78f9ce11/transformed/jetified-play-services-base-18.1.0/res/values-it/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
