@@ -1,3 +1,4 @@
+//calculate the calorie
 extension CalorieExtension on String {
   double calculateCalories({
     required double weightKg,
@@ -13,5 +14,17 @@ extension CalorieExtension on String {
     } else {
       throw ArgumentError('Invalid gender: must be "male" or "female"');
     }
+  }
+}
+
+// calculate the percent
+extension PercentageAway on num {
+  double percentageAwayFrom(num target) {
+    if (target == 0) return 0;
+    return ((target - this) / target * 100).clamp(0, 100);
+  }
+  double percentageTowards(num target) {
+    if (target == 0) return 100;
+    return ((this / target) * 100).clamp(0, 100);
   }
 }
