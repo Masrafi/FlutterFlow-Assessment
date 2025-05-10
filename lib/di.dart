@@ -5,25 +5,27 @@ import 'package:atbjobsapp/feature/order/domain/usecases/fetch_foods_usecase.dar
 import 'package:atbjobsapp/feature/order/presentation/bloc/carb_bloc.dart';
 import 'package:atbjobsapp/feature/order/presentation/bloc/meat_bloc.dart';
 import 'package:atbjobsapp/feature/order/presentation/bloc/food_bloc.dart';
+import 'package:atbjobsapp/feature/order/presentation/bloc/post_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
 
 Future<void> setup() async {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+final firestore = FirebaseFirestore.instance;
+  final dio = Dio();
+  getIt.registerLazySingleton<Dio>(() => dio);
 
-  // Data sources
-  getIt.registerLazySingleton<FoodRemoteDataSource>(() => FirebaseFoodRemoteDataSource(firestore));
+  getIt.registerLazySingleton<FoodRemoteDataSource>(() => FirebaseFoodRemoteDataSource(firestore, dio));
 
-  // Repository
   getIt.registerLazySingleton<FoodRepository>(() => FoodRepositoryImpl(getIt()));
-
-  // Use case
   getIt.registerLazySingleton(() => FetchFoodsUseCase(getIt()));
 
+
   // Bloc
-getIt.registerFactory(() => FoodBloc(getIt<FetchFoodsUseCase>()));
-getIt.registerFactory(() => MeatBloc(getIt<FetchFoodsUseCase>()));
-getIt.registerFactory(() => CarbBloc(getIt<FetchFoodsUseCase>()));
+  getIt.registerFactory(() => FoodBloc(getIt<FetchFoodsUseCase>()));
+  getIt.registerFactory(() => MeatBloc(getIt<FetchFoodsUseCase>()));
+  getIt.registerFactory(() => CarbBloc(getIt<FetchFoodsUseCase>()));
+  getIt.registerFactory(() => PostBloc(getIt<FetchFoodsUseCase>()));
 }
